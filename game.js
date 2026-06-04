@@ -291,20 +291,24 @@
     const text = I18N[currentLang];
     const score = getScore();
     const reward = rewardMessage(score);
-    const rewardHtml = score > 1000
-      ? `<button class="result-message result-link" type="button" id="rewardLink">${reward}</button>`
-      : `<span class="result-message">${reward}</span>`;
     overlayTitle.textContent = `${text.gameOver}: ${score} ${text.points}`;
-    overlayText.innerHTML = `
-      ${rewardHtml}
-      <span class="result-detail">${text.overText(Math.floor(distance), coinCount)}</span>
-    `;
-    const rewardLink = document.getElementById("rewardLink");
-    if (rewardLink) {
-      rewardLink.addEventListener("click", () => {
+    overlayText.replaceChildren();
+
+    const rewardControl = document.createElement(score > 1000 ? "button" : "span");
+    rewardControl.className = score > 1000 ? "result-message result-link" : "result-message";
+    rewardControl.textContent = reward;
+    if (score > 1000) {
+      rewardControl.type = "button";
+      rewardControl.addEventListener("click", () => {
         window.location.href = JUVENILE_OFFER_URL;
       });
     }
+    overlayText.appendChild(rewardControl);
+
+    const resultDetail = document.createElement("span");
+    resultDetail.className = "result-detail";
+    resultDetail.textContent = text.overText(Math.floor(distance), coinCount);
+    overlayText.appendChild(resultDetail);
   }
 
   function getScore() {
@@ -1039,24 +1043,24 @@
     if (!activeSkills.length) return;
     ctx.save();
     activeSkills.forEach((skill, index) => {
-      const x = 18;
-      const y = 18 + index * 66;
-      const w = 326;
-      const h = 54;
+      const x = 14;
+      const y = 14 + index * 44;
+      const w = 250;
+      const h = 36;
       ctx.fillStyle = "rgba(255, 246, 218, 0.94)";
-      roundRect(x, y, w, h, 8);
+      roundRect(x, y, w, h, 6);
       ctx.fill();
       ctx.strokeStyle = "rgba(116, 45, 18, 0.55)";
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
       ctx.fillStyle = skill.accent;
-      ctx.fillRect(x + 8, y + 8, 6, h - 16);
+      ctx.fillRect(x + 7, y + 7, 4, h - 14);
       ctx.fillStyle = "#6f2110";
-      ctx.font = "bold 17px Microsoft YaHei, Segoe UI, Arial";
-      ctx.fillText(`${skill.title} ${skill.remaining.toFixed(1)}s`, x + 22, y + 22);
+      ctx.font = "bold 13px Microsoft YaHei, Segoe UI, Arial";
+      ctx.fillText(`${skill.title} ${skill.remaining.toFixed(1)}s`, x + 17, y + 15);
       ctx.fillStyle = "#9a3519";
-      ctx.font = "15px Microsoft YaHei, Segoe UI, Arial";
-      ctx.fillText(skill.detail, x + 22, y + 43);
+      ctx.font = "12px Microsoft YaHei, Segoe UI, Arial";
+      ctx.fillText(skill.detail, x + 17, y + 30);
     });
     ctx.restore();
   }
