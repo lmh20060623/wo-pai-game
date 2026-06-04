@@ -384,6 +384,10 @@
 
     player.vy += 1750 * dt;
     player.y += player.vy * dt;
+    if (player.y < 0) {
+      player.y = 0;
+      player.vy = Math.max(0, player.vy);
+    }
     if (player.y + player.h >= GROUND_Y) {
       player.y = GROUND_Y - player.h;
       player.vy = 0;
