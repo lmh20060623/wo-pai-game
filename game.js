@@ -850,16 +850,19 @@
 
   function drawSkillShield(strokeOnly = false) {
     const cx = player.x + player.w / 2;
-    const top = player.y - 26;
-    const shieldW = player.w * 1.52;
-    const shieldH = player.h * 1.72;
+    const scale = playerDrawScale();
+    const scaledH = player.h * scale;
+    const scaledY = player.y + player.h - scaledH;
+    const top = scaledY - 26 * scale;
+    const shieldW = player.w * scale * 1.52;
+    const shieldH = scaledH * 1.72;
     const left = cx - shieldW / 2;
     const right = cx + shieldW / 2;
     const bottom = top + shieldH;
     ctx.save();
     ctx.fillStyle = "rgba(24, 135, 224, 0.22)";
     ctx.strokeStyle = "rgba(24, 135, 224, 0.9)";
-    ctx.lineWidth = 3.2;
+    ctx.lineWidth = 3.2 * scale;
     ctx.beginPath();
     ctx.moveTo(cx, top);
     ctx.bezierCurveTo(cx + shieldW * 0.18, top + shieldH * 0.12, right - shieldW * 0.18, top + shieldH * 0.16, right, top + shieldH * 0.18);
