@@ -24,7 +24,7 @@
   const PLAYER_MIN_X = 56;
   const PLAYER_MAX_X = 315;
   const JUMP_VELOCITY = -620;
-  const JUMP_SKILL_VELOCITY_MULTIPLIER = 2;
+  const JUMP_SKILL_VELOCITY_MULTIPLIER = Math.sqrt(3);
   const JUMP_SKILL_SPAWN_RATE = 0.75;
   const SIZE_SKILL_SCALE = 2;
   const SIZE_SKILL_SPAWN_RATE = JUMP_SKILL_SPAWN_RATE * 0.5;
@@ -1027,7 +1027,7 @@
     if (isJumpSkillActive()) {
       activeSkills.push({
         title: JUMP_SKILL_NAME,
-        detail: "跳跃高度增加300%",
+        detail: "跳跃高度增加200%",
         remaining: Math.max(0, jumpSkillActiveUntil - worldT),
         accent: "#ff8a00",
       });
