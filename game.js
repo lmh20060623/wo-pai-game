@@ -80,9 +80,9 @@
     en: {
       htmlLang: "en",
       toggle: "中文",
-      tagline: "Run forward, dodge desks, chairs and clouds, collect coins and skill orbs.",
+      tagline: "有梦有方向",
       distance: "Distance",
-      coins: "Coins",
+      coins: "金币",
       score: "Score",
       readyTitle: "Press Space or Up to Start",
       readyText: "Up jumps, Down ducks, Left/Right move on the track. Skill orbs grant a random 3-7s shield.",
@@ -101,7 +101,7 @@
     zh: {
       htmlLang: "zh-CN",
       toggle: "English",
-      tagline: "向前奔跑，躲避桌椅和云朵，收集金币与技能球。",
+      tagline: "有梦有方向",
       distance: "距离",
       coins: "金币",
       score: "分数",
