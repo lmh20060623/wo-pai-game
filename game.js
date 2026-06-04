@@ -1002,22 +1002,50 @@
   function drawSkillStatus() {
     const activeSkills = [];
     if (isSkillActive()) {
-      activeSkills.push(`${SKILL_NAME} ${Math.max(0, skillActiveUntil - worldT).toFixed(1)}s`);
+      activeSkills.push({
+        title: SKILL_NAME,
+        detail: "速度增加300%，并且提供保护罩",
+        remaining: Math.max(0, skillActiveUntil - worldT),
+        accent: "#2f9cff",
+      });
     }
     if (isJumpSkillActive()) {
-      activeSkills.push(`${JUMP_SKILL_NAME} ${Math.max(0, jumpSkillActiveUntil - worldT).toFixed(1)}s`);
+      activeSkills.push({
+        title: JUMP_SKILL_NAME,
+        detail: "跳跃高度增加300%",
+        remaining: Math.max(0, jumpSkillActiveUntil - worldT),
+        accent: "#ff8a00",
+      });
     }
     if (isSizeSkillActive()) {
-      activeSkills.push(`${SIZE_SKILL_NAME} ${Math.max(0, sizeSkillActiveUntil - worldT).toFixed(1)}s`);
+      activeSkills.push({
+        title: SIZE_SKILL_NAME,
+        detail: "体积增加300%",
+        remaining: Math.max(0, sizeSkillActiveUntil - worldT),
+        accent: "#00c816",
+      });
     }
     if (!activeSkills.length) return;
     ctx.save();
-    ctx.fillStyle = "rgba(23, 33, 43, 0.72)";
-    ctx.fillRect(18, 18, 242, 12 + activeSkills.length * 26);
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "18px Microsoft YaHei, Segoe UI, Arial";
-    activeSkills.forEach((label, index) => {
-      ctx.fillText(label, 32, 41 + index * 26);
+    activeSkills.forEach((skill, index) => {
+      const x = 18;
+      const y = 18 + index * 66;
+      const w = 326;
+      const h = 54;
+      ctx.fillStyle = "rgba(255, 246, 218, 0.94)";
+      roundRect(x, y, w, h, 8);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(116, 45, 18, 0.55)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = skill.accent;
+      ctx.fillRect(x + 8, y + 8, 6, h - 16);
+      ctx.fillStyle = "#6f2110";
+      ctx.font = "bold 17px Microsoft YaHei, Segoe UI, Arial";
+      ctx.fillText(`${skill.title} ${skill.remaining.toFixed(1)}s`, x + 22, y + 22);
+      ctx.fillStyle = "#9a3519";
+      ctx.font = "15px Microsoft YaHei, Segoe UI, Arial";
+      ctx.fillText(skill.detail, x + 22, y + 43);
     });
     ctx.restore();
   }
