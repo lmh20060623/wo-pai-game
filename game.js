@@ -26,10 +26,13 @@
   const JUMP_VELOCITY = -620;
   const JUMP_SKILL_VELOCITY_MULTIPLIER = 2;
   const JUMP_SKILL_SPAWN_RATE = 0.75;
+  const SIZE_SKILL_SCALE = 2;
+  const SIZE_SKILL_SPAWN_RATE = JUMP_SKILL_SPAWN_RATE * 0.5;
   const SKILL_MIN_DURATION = 3;
   const SKILL_MAX_DURATION = 7;
   const SKILL_NAME = "通通校园";
   const JUMP_SKILL_NAME = "跳跃增强";
+  const SIZE_SKILL_NAME = "体积增强";
   const SKILL_BANNER_DURATION = 7;
 
   const assets = {
@@ -42,6 +45,7 @@
     coin: loadImage("assets/coin.png"),
     skillOrb: loadImage("assets/skill-orb-cutout.png"),
     jumpSkillOrb: loadImage("assets/jump-skill-orb.png"),
+    sizeSkillOrb: loadImage("assets/size-skill-orb.png"),
     rainbowTail: loadImage("assets/rainbow-tail.jpg"),
     backgrounds: [
       loadImage("assets/background-1.png"),
@@ -79,8 +83,11 @@
   let skillOrbs = [];
   let jumpSkillTimer = 0;
   let jumpSkillOrbs = [];
+  let sizeSkillTimer = 0;
+  let sizeSkillOrbs = [];
   let skillActiveUntil = 0;
   let jumpSkillActiveUntil = 0;
+  let sizeSkillActiveUntil = 0;
   let skillBannerUntil = 0;
   let skillBannerText = "";
   let playerIntroFlashUntil = 0;
@@ -228,6 +235,7 @@
     coinTimer = 0.8;
     skillTimer = random(3.2, 5.8);
     jumpSkillTimer = random(3.2 / JUMP_SKILL_SPAWN_RATE, 5.8 / JUMP_SKILL_SPAWN_RATE);
+    sizeSkillTimer = random(3.2 / SIZE_SKILL_SPAWN_RATE, 5.8 / SIZE_SKILL_SPAWN_RATE);
     distance = 0;
     coinCount = 0;
     speed = 330;
@@ -238,8 +246,10 @@
     coins = [];
     skillOrbs = [];
     jumpSkillOrbs = [];
+    sizeSkillOrbs = [];
     skillActiveUntil = 0;
     jumpSkillActiveUntil = 0;
+    sizeSkillActiveUntil = 0;
     skillBannerUntil = 0;
     skillBannerText = "";
     playerIntroFlashUntil = 1.1;
@@ -389,6 +399,11 @@
       spawnJumpSkillOrb();
       jumpSkillTimer = random(6.5 / JUMP_SKILL_SPAWN_RATE, 10.5 / JUMP_SKILL_SPAWN_RATE);
     }
+    sizeSkillTimer -= dt;
+    if (sizeSkillTimer <= 0) {
+      spawnSizeSkillOrb();
+      sizeSkillTimer = random(6.5 / SIZE_SKILL_SPAWN_RATE, 10.5 / SIZE_SKILL_SPAWN_RATE);
+    }
 
     for (const obstacle of obstacles) {
       obstacle.x -= sceneSpeed * dt;
@@ -407,10 +422,16 @@
       orb.spin += dt * 5.4;
       orb.y += Math.sin(worldT * 5.6 + orb.phase) * 0.18;
     }
+    for (const orb of sizeSkillOrbs) {
+      orb.x -= sceneSpeed * dt;
+      orb.spin += dt * 4.8;
+      orb.y += Math.sin(worldT * 4.8 + orb.phase) * 0.18;
+    }
     obstacles = obstacles.filter((o) => o.x + o.w > -40);
     coins = coins.filter((c) => c.x + c.r > -40 && !c.collected);
     skillOrbs = skillOrbs.filter((orb) => orb.x + orb.r > -40 && !orb.collected);
     jumpSkillOrbs = jumpSkillOrbs.filter((orb) => orb.x + orb.r > -40 && !orb.collected);
+    sizeSkillOrbs = sizeSkillOrbs.filter((orb) => orb.x + orb.r > -40 && !orb.collected);
 
     const hitbox = playerHitbox();
     if (!isSkillActive()) {
@@ -446,6 +467,16 @@
         jumpSkillActiveUntil = worldT + duration;
         skillBannerUntil = worldT + SKILL_BANNER_DURATION;
         skillBannerText = JUMP_SKILL_NAME;
+      }
+    }
+    for (const orb of sizeSkillOrbs) {
+      const box = { x: orb.x - orb.r, y: orb.y - orb.r, w: orb.r * 2, h: orb.r * 2 };
+      if (rectsOverlap(hitbox, box)) {
+        orb.collected = true;
+        const duration = random(SKILL_MIN_DURATION, SKILL_MAX_DURATION);
+        sizeSkillActiveUntil = worldT + duration;
+        skillBannerUntil = worldT + SKILL_BANNER_DURATION;
+        skillBannerText = SIZE_SKILL_NAME;
       }
     }
     updateGroundSfx();
@@ -511,7 +542,8 @@
     const overlapsObstacle = obstacles.some((obstacle) => rectsOverlap(box, obstacle));
     const overlapsCoin = coins.some((coin) => rectsOverlap(box, coinRect(coin, 8)));
     const overlapsJumpSkill = jumpSkillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
-    if (!overlapsObstacle && !overlapsCoin && !overlapsJumpSkill) {
+    const overlapsSizeSkill = sizeSkillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
+    if (!overlapsObstacle && !overlapsCoin && !overlapsJumpSkill && !overlapsSizeSkill) {
       skillOrbs.push(orb);
     }
   }
@@ -530,8 +562,29 @@
     const overlapsCoin = coins.some((coin) => rectsOverlap(box, coinRect(coin, 8)));
     const overlapsShieldSkill = skillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
     const overlapsJumpSkill = jumpSkillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
-    if (!overlapsObstacle && !overlapsCoin && !overlapsShieldSkill && !overlapsJumpSkill) {
+    const overlapsSizeSkill = sizeSkillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
+    if (!overlapsObstacle && !overlapsCoin && !overlapsShieldSkill && !overlapsJumpSkill && !overlapsSizeSkill) {
       jumpSkillOrbs.push(orb);
+    }
+  }
+
+  function spawnSizeSkillOrb() {
+    const orb = {
+      x: BASE_W + random(108, 208),
+      y: Math.random() < 0.46 ? GROUND_Y - 46 : random(182, 240),
+      r: 17,
+      spin: random(0, Math.PI * 2),
+      phase: random(0, Math.PI * 2),
+      collected: false,
+    };
+    const box = orbRect(orb, 12);
+    const overlapsObstacle = obstacles.some((obstacle) => rectsOverlap(box, obstacle));
+    const overlapsCoin = coins.some((coin) => rectsOverlap(box, coinRect(coin, 8)));
+    const overlapsShieldSkill = skillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
+    const overlapsJumpSkill = jumpSkillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
+    const overlapsSizeSkill = sizeSkillOrbs.some((existing) => rectsOverlap(box, orbRect(existing, 10)));
+    if (!overlapsObstacle && !overlapsCoin && !overlapsShieldSkill && !overlapsJumpSkill && !overlapsSizeSkill) {
+      sizeSkillOrbs.push(orb);
     }
   }
 
@@ -596,6 +649,19 @@
   function playerHitbox() {
     const insetX = player.ducking ? 12 : 10;
     const insetTop = player.ducking ? 9 : 8;
+    const scale = playerDrawScale();
+    if (scale > 1) {
+      const scaledW = player.w * scale;
+      const scaledH = player.h * scale;
+      const scaledX = player.x + player.w / 2 - scaledW / 2;
+      const scaledY = GROUND_Y - scaledH;
+      return {
+        x: scaledX + insetX * scale,
+        y: scaledY + insetTop * scale,
+        w: scaledW - insetX * scale * 2,
+        h: scaledH - insetTop * scale - 6 * scale,
+      };
+    }
     return {
       x: player.x + insetX,
       y: player.y + insetTop,
@@ -616,6 +682,7 @@
     coins.forEach(drawCoin);
     skillOrbs.forEach(drawSkillOrb);
     jumpSkillOrbs.forEach(drawJumpSkillOrb);
+    sizeSkillOrbs.forEach(drawSizeSkillOrb);
     drawRainbowTail();
     drawPlayer();
     drawSkillStatus();
@@ -677,6 +744,11 @@
   function drawPlayer() {
     ctx.save();
     const skillActive = isSkillActive();
+    const scale = playerDrawScale();
+    const scaledW = player.w * scale;
+    const scaledH = player.h * scale;
+    const scaledX = player.x + player.w / 2 - scaledW / 2;
+    const scaledY = GROUND_Y - scaledH;
     if (!skillActive && worldT < playerIntroFlashUntil) {
       ctx.globalAlpha = Math.sin(worldT * 48) > 0 ? 1 : 0.28;
     }
@@ -688,23 +760,23 @@
       : assets.runner;
     if (img.complete && img.naturalWidth) {
       if (skillActive && img === assets.skillRunner) {
-        const drawW = player.w * 1.74;
+        const drawW = scaledW * 1.74;
         const drawH = drawW * (img.naturalHeight / img.naturalWidth);
         const drawX = player.x + player.w / 2 - drawW / 2;
-        const drawY = player.y + player.h / 2 - drawH / 2 + 2;
+        const drawY = scaledY + scaledH / 2 - drawH / 2 + 2;
         ctx.save();
         ctx.translate(drawX + drawW, drawY);
         ctx.scale(-1, 1);
         drawRunningSprite(img, 0, 0, drawW, drawH, -1);
         ctx.restore();
       } else {
-        drawRunningSprite(img, player.x - 6, player.y - 8, player.w + 12, player.h + 14, 1);
+        drawRunningSprite(img, scaledX - 6 * scale, scaledY - 8 * scale, scaledW + 12 * scale, scaledH + 14 * scale, 1);
       }
     } else {
       ctx.fillStyle = "#2b6f45";
-      ctx.fillRect(player.x, player.y, player.w, player.h);
+      ctx.fillRect(scaledX, scaledY, scaledW, scaledH);
       ctx.fillStyle = "#15222e";
-      ctx.fillRect(player.x + player.w - 18, player.y + 16, 6, 6);
+      ctx.fillRect(scaledX + scaledW - 18 * scale, scaledY + 16 * scale, 6 * scale, 6 * scale);
     }
     if (skillActive) {
       drawSkillShield(true);
@@ -906,6 +978,28 @@
     ctx.restore();
   }
 
+  function drawSizeSkillOrb(orb) {
+    ctx.save();
+    const pulse = 1 + Math.sin(orb.spin) * 0.08;
+    const size = orb.r * 2 * pulse;
+    ctx.shadowColor = "rgba(0, 205, 22, 0.78)";
+    ctx.shadowBlur = 14;
+    const img = assets.sizeSkillOrb;
+    if (img.complete && img.naturalWidth) {
+      ctx.drawImage(img, orb.x - size / 2, orb.y - size / 2, size, size);
+    } else {
+      const grad = ctx.createRadialGradient(orb.x - 5, orb.y - 6, 2, orb.x, orb.y, orb.r);
+      grad.addColorStop(0, "#ffffff");
+      grad.addColorStop(0.55, "#00d820");
+      grad.addColorStop(1, "#138a1c");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(orb.x, orb.y, orb.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
   function drawSkillStatus() {
     const activeSkills = [];
     if (isSkillActive()) {
@@ -913,6 +1007,9 @@
     }
     if (isJumpSkillActive()) {
       activeSkills.push(`${JUMP_SKILL_NAME} ${Math.max(0, jumpSkillActiveUntil - worldT).toFixed(1)}s`);
+    }
+    if (isSizeSkillActive()) {
+      activeSkills.push(`${SIZE_SKILL_NAME} ${Math.max(0, sizeSkillActiveUntil - worldT).toFixed(1)}s`);
     }
     if (!activeSkills.length) return;
     ctx.save();
@@ -956,6 +1053,14 @@
 
   function isJumpSkillActive() {
     return worldT < jumpSkillActiveUntil;
+  }
+
+  function isSizeSkillActive() {
+    return worldT < sizeSkillActiveUntil;
+  }
+
+  function playerDrawScale() {
+    return isSizeSkillActive() ? SIZE_SKILL_SCALE : 1;
   }
 
   function randomBackgroundIndex(previous) {
