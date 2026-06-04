@@ -33,6 +33,7 @@
   const SKILL_NAME = "通通校园";
   const JUMP_SKILL_NAME = "跳跃增强";
   const SIZE_SKILL_NAME = "体积增强";
+  const JUVENILE_OFFER_URL = "https://qy.chinaunicom.cn/mobile-h5/juvenile/home.html";
   const SKILL_BANNER_DURATION = 7;
 
   const assets = {
@@ -289,11 +290,21 @@
   function renderGameOverOverlay() {
     const text = I18N[currentLang];
     const score = getScore();
+    const reward = rewardMessage(score);
+    const rewardHtml = score > 1000
+      ? `<button class="result-message result-link" type="button" id="rewardLink">${reward}</button>`
+      : `<span class="result-message">${reward}</span>`;
     overlayTitle.textContent = `${text.gameOver}: ${score} ${text.points}`;
     overlayText.innerHTML = `
-      <span class="result-message">${rewardMessage(score)}</span>
+      ${rewardHtml}
       <span class="result-detail">${text.overText(Math.floor(distance), coinCount)}</span>
     `;
+    const rewardLink = document.getElementById("rewardLink");
+    if (rewardLink) {
+      rewardLink.addEventListener("click", () => {
+        window.location.href = JUVENILE_OFFER_URL;
+      });
+    }
   }
 
   function getScore() {
