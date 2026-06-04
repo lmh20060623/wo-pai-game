@@ -693,6 +693,21 @@ h1 {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 10px 22px rgba(156, 46, 19, 0.18);
 }
 
+.result-link {
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  text-align: center;
+}
+
+.result-link:hover,
+.result-link:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(255, 247, 219, 0.92);
+  background: linear-gradient(180deg, rgba(255, 248, 218, 0.98), rgba(255, 151, 55, 0.94));
+  outline: none;
+}
+
 #startBtn {
   background: linear-gradient(180deg, #f0692d, #b73520);
   color: #fff8ea;
