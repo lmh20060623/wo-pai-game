@@ -628,16 +628,26 @@ body {
 
 h1 {
   color: var(--warm-text);
+  text-align: center;
   text-shadow: 0 3px 12px rgba(99, 22, 13, 0.34);
+}
+
+.topbar > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .brand-stack {
   display: flex;
-  width: min(270px, 42vw);
+  width: clamp(136px, 15vw, 174px);
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 4px;
+  margin-right: auto;
   margin-bottom: 6px;
+  margin-left: auto;
 }
 
 .brand-stack img {
@@ -649,7 +659,7 @@ h1 {
 }
 
 .brand-stack img + img {
-  width: 92%;
+  width: 100%;
 }
 
 .topbar p {
@@ -836,7 +846,7 @@ body::after {
 
 @media (max-width: 900px) {
   .brand-stack {
-    width: min(190px, 36vw);
+    width: clamp(120px, 30vw, 152px);
     gap: 3px;
     margin-bottom: 4px;
   }
