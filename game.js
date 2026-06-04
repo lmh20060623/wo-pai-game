@@ -654,7 +654,7 @@
       const scaledW = player.w * scale;
       const scaledH = player.h * scale;
       const scaledX = player.x + player.w / 2 - scaledW / 2;
-      const scaledY = GROUND_Y - scaledH;
+      const scaledY = player.y + player.h - scaledH;
       return {
         x: scaledX + insetX * scale,
         y: scaledY + insetTop * scale,
@@ -748,7 +748,7 @@
     const scaledW = player.w * scale;
     const scaledH = player.h * scale;
     const scaledX = player.x + player.w / 2 - scaledW / 2;
-    const scaledY = GROUND_Y - scaledH;
+    const scaledY = player.y + player.h - scaledH;
     if (!skillActive && worldT < playerIntroFlashUntil) {
       ctx.globalAlpha = Math.sin(worldT * 48) > 0 ? 1 : 0.28;
     }
