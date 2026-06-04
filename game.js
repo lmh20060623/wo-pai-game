@@ -33,6 +33,11 @@
   const SKILL_NAME = "通通校园";
   const JUMP_SKILL_NAME = "跳跃增强";
   const SIZE_SKILL_NAME = "体积增强";
+  const SKILL_BANNER_NAMES = {
+    shield: "AI辅助写作技能",
+    jump: "AI学术问答技能",
+    size: "AI学习拓展技能",
+  };
   const JUVENILE_OFFER_URL = "https://qy.chinaunicom.cn/mobile-h5/juvenile/home.html";
   const SKILL_BANNER_DURATION = 7;
 
@@ -471,7 +476,7 @@
         const duration = random(SKILL_MIN_DURATION, SKILL_MAX_DURATION);
         skillActiveUntil = worldT + duration;
         skillBannerUntil = worldT + SKILL_BANNER_DURATION;
-        skillBannerText = SKILL_NAME;
+        skillBannerText = SKILL_BANNER_NAMES.shield;
       }
     }
     for (const orb of jumpSkillOrbs) {
@@ -481,7 +486,7 @@
         const duration = random(SKILL_MIN_DURATION, SKILL_MAX_DURATION);
         jumpSkillActiveUntil = worldT + duration;
         skillBannerUntil = worldT + SKILL_BANNER_DURATION;
-        skillBannerText = JUMP_SKILL_NAME;
+        skillBannerText = SKILL_BANNER_NAMES.jump;
       }
     }
     for (const orb of sizeSkillOrbs) {
@@ -491,7 +496,7 @@
         const duration = random(SKILL_MIN_DURATION, SKILL_MAX_DURATION);
         sizeSkillActiveUntil = worldT + duration;
         skillBannerUntil = worldT + SKILL_BANNER_DURATION;
-        skillBannerText = SIZE_SKILL_NAME;
+        skillBannerText = SKILL_BANNER_NAMES.size;
       }
     }
     updateGroundSfx();
@@ -1089,7 +1094,7 @@
     ctx.stroke();
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 20px Microsoft YaHei, Segoe UI, Arial";
-    ctx.fillText(`技能：${skillBannerText || SKILL_NAME}`, x + 22, y + 27);
+    ctx.fillText(`技能：${skillBannerText || SKILL_BANNER_NAMES.shield}`, x + 22, y + 27);
     ctx.restore();
   }
 
