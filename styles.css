@@ -682,6 +682,7 @@ h1 {
 }
 
 .overlay-panel p,
+.overlay-copy,
 .result-detail {
   color: #7d3a1e;
 }
