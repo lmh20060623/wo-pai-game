@@ -628,11 +628,13 @@ body {
 
 h1 {
   color: var(--warm-text);
+  font-size: var(--brand-title-size);
   text-align: center;
   text-shadow: 0 3px 12px rgba(99, 22, 13, 0.34);
 }
 
 .topbar > div:first-child {
+  --brand-title-size: 34px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -641,20 +643,21 @@ h1 {
 
 .brand-stack {
   display: flex;
-  width: clamp(136px, 15vw, 174px);
+  width: calc(var(--brand-title-size) * 4);
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   margin-right: auto;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   margin-left: auto;
 }
 
 .brand-stack img {
   display: block;
   width: 100%;
-  height: auto;
+  height: var(--brand-title-size);
   object-fit: contain;
+  object-position: center;
   filter: drop-shadow(0 2px 5px rgba(99, 22, 13, 0.18));
 }
 
@@ -845,8 +848,12 @@ body::after {
 }
 
 @media (max-width: 900px) {
+  .topbar > div:first-child {
+    --brand-title-size: 24px;
+  }
+
   .brand-stack {
-    width: clamp(120px, 30vw, 152px);
+    width: calc(var(--brand-title-size) * 4);
     gap: 3px;
     margin-bottom: 4px;
   }
