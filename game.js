@@ -365,11 +365,7 @@
     if (player.grounded) {
       player.y = GROUND_Y - player.h;
     }
-    if (keys.has("ArrowUp") && player.grounded) {
-      player.vy = JUMP_VELOCITY * (isJumpSkillActive() ? JUMP_SKILL_VELOCITY_MULTIPLIER : 1);
-      player.grounded = false;
-      player.ducking = false;
-    }
+    if (keys.has("ArrowUp")) triggerJump();
 
     player.vy += 1750 * dt;
     player.y += player.vy * dt;
@@ -1104,25 +1100,35 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  function controlKeyFromEvent(e) {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code)) return e.code;
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) return e.key;
+    if (e.key === " ") return "Space";
+    return "";
+  }
+
   function handleKeyDown(e) {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code) || e.key === " ") {
+    const key = controlKeyFromEvent(e);
+    if (key) {
       e.preventDefault();
     }
-    if (e.code === "Space" || e.key === " ") {
+    if (key === "Space") {
       if (state !== "running") reset();
       return;
     }
-    if (e.key.startsWith("Arrow")) {
-      keys.add(e.key);
-      if (state !== "running" && e.key === "ArrowUp") {
+    if (key.startsWith("Arrow")) {
+      keys.add(key);
+      if (state !== "running" && key === "ArrowUp") {
         reset();
       }
+      if (key === "ArrowUp") triggerJump();
     }
   }
 
   function handleKeyUp(e) {
-    if (e.key.startsWith("Arrow")) {
-      keys.delete(e.key);
+    const key = controlKeyFromEvent(e);
+    if (key.startsWith("Arrow")) {
+      keys.delete(key);
     }
   }
 
@@ -1144,11 +1150,23 @@
       player.x = clamp(player.x - nudge, PLAYER_MIN_X, PLAYER_MAX_X);
     } else if (key === "ArrowRight") {
       player.x = clamp(player.x + nudge, PLAYER_MIN_X, PLAYER_MAX_X);
+    } else if (key === "ArrowUp") {
+      triggerJump();
     } else if (key === "ArrowDown" && player.grounded) {
       player.ducking = true;
       player.h = 46;
       player.y = GROUND_Y - player.h;
     }
+  }
+
+  function triggerJump() {
+    if (state !== "running" || !player.grounded) return false;
+    player.ducking = false;
+    player.h = 74;
+    player.y = GROUND_Y - player.h;
+    player.vy = JUMP_VELOCITY * (isJumpSkillActive() ? JUMP_SKILL_VELOCITY_MULTIPLIER : 1);
+    player.grounded = false;
+    return true;
   }
 
   function beginTouchKey(pointerId, key) {
@@ -1162,8 +1180,8 @@
     }
     activeTouchKeys.set(pointerId, key);
     syncActiveTouchKeys();
-    nudgeTouchResponse(key);
     if (state !== "running" && key === "ArrowUp") reset();
+    nudgeTouchResponse(key);
   }
 
   function endTouchKey(pointerId) {
