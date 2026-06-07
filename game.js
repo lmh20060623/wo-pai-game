@@ -82,7 +82,7 @@
   let worldT = 0;
   let backgroundIndex = 0;
   let backgroundTimer = 0;
-  let currentLang = localStorage.getItem("timeoutRunnerLang") || "en";
+  let currentLang = "zh";
   let obstacles = [];
   let coins = [];
   let skillTimer = 0;
@@ -122,18 +122,18 @@
     },
     zh: {
       htmlLang: "zh-CN",
-      toggle: "English",
+      toggle: "中文",
       tagline: "有梦有方向",
-      distance: "距离",
-      coins: "金币",
+      distance: "沃派里程",
+      coins: "沃派积分",
       score: "分数",
       readyTitle: "按空格或 ↑ 开始",
-      readyText: "↑ 跳跃，↓ 下蹲，←/→ 左右移动。拾取技能球后随机 3-7 秒内无视障碍。",
+      readyText: "↑ 上跳，↓ 蹲下，← 前进，→ 后退。不要碰到桌椅或云朵。",
       start: "开始游戏",
       restart: "重新开始",
       gameOver: "游戏结束",
       points: "分",
-      overText: (meters, coinTotal) => `距离 ${meters}m，金币 ${coinTotal} 枚。按空格或点击按钮重新开始。`,
+      overText: (meters, coinTotal) => `沃派里程 ${meters}m，沃派积分 ${coinTotal}。按空格或点击按钮重新开始。`,
       touch: {
         ArrowLeft: "←",
         ArrowDown: "↓",
@@ -289,7 +289,7 @@
   function rewardMessage(score) {
     if (score > 1000) return "您已成功获得联通青少年专项优惠";
     if (score > 500) return "您还没有获得优惠哦，请再接再厉";
-    return "加油，你还可以做得更好！";
+    return "加油沃派青年，你还可以做得更好！";
   }
 
   function renderGameOverOverlay() {
@@ -348,8 +348,8 @@
   }
 
   function toggleLanguage() {
-    currentLang = currentLang === "en" ? "zh" : "en";
-    localStorage.setItem("timeoutRunnerLang", currentLang);
+    currentLang = "zh";
+    localStorage.setItem("timeoutRunnerLang", "zh");
     applyLanguage();
   }
 
@@ -705,6 +705,7 @@
     sizeSkillOrbs.forEach(drawSizeSkillOrb);
     drawRainbowTail();
     drawPlayer();
+    drawControlGuide();
     drawSkillStatus();
     drawSkillBanner();
   }
@@ -1023,6 +1024,30 @@
     ctx.restore();
   }
 
+  function drawControlGuide() {
+    if (state !== "running") return;
+    const x = 14;
+    const y = 14;
+    const w = 268;
+    const h = 74;
+    ctx.save();
+    ctx.fillStyle = "rgba(255, 246, 218, 0.94)";
+    roundRect(x, y, w, h, 8);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(116, 45, 18, 0.58)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = "#6f2110";
+    ctx.font = "bold 14px Microsoft YaHei, Segoe UI, Arial";
+    ctx.fillText("操作说明", x + 14, y + 20);
+    ctx.font = "12px Microsoft YaHei, Segoe UI, Arial";
+    ctx.fillStyle = "#8d2c15";
+    ctx.fillText("↑ 上跳   ↓ 蹲下   ← 前进   → 后退", x + 14, y + 42);
+    ctx.fillStyle = "#c23b17";
+    ctx.fillText("不要碰到桌椅或云朵", x + 14, y + 62);
+    ctx.restore();
+  }
+
   function drawSkillStatus() {
     const activeSkills = [];
     if (isSkillActive()) {
@@ -1053,7 +1078,7 @@
     ctx.save();
     activeSkills.forEach((skill, index) => {
       const x = 14;
-      const y = 14 + index * 44;
+      const y = 100 + index * 44;
       const w = 250;
       const h = 36;
       ctx.fillStyle = "rgba(255, 246, 218, 0.94)";

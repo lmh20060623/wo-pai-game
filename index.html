@@ -28,10 +28,10 @@
           <p id="tagline">有梦有方向</p>
         </div>
         <div class="scoreboard">
-          <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">中文</button>
-          <span><span id="distanceLabel">Distance</span> <strong id="distance">0</strong>m</span>
-          <span><span id="coinsLabel">Coins</span> <strong id="coins">0</strong></span>
-          <span><span id="scoreLabel">Score</span> <strong id="score">0</strong></span>
+          <button id="langToggle" class="lang-toggle" type="button" aria-label="当前语言">中文</button>
+          <span><span id="distanceLabel">沃派里程</span> <strong id="distance">0</strong>m</span>
+          <span><span id="coinsLabel">沃派积分</span> <strong id="coins">0</strong></span>
+          <span><span id="scoreLabel">分数</span> <strong id="score">0</strong></span>
         </div>
       </header>
 
@@ -39,9 +39,9 @@
         <canvas id="game" width="960" height="420" aria-label="沃派酷跑"></canvas>
         <div id="overlay" class="overlay">
           <div class="overlay-panel">
-            <h2 id="overlayTitle">Press Space or Up to Start</h2>
-            <div id="overlayText" class="overlay-copy">Up jumps, Down ducks, Left/Right move on the track. Coins are worth 10 points.</div>
-            <button id="startBtn" type="button">Start Game</button>
+            <h2 id="overlayTitle">按空格或 ↑ 开始</h2>
+            <div id="overlayText" class="overlay-copy">↑ 上跳，↓ 蹲下，← 前进，→ 后退。不要碰到桌椅或云朵。</div>
+            <button id="startBtn" type="button">开始游戏</button>
           </div>
         </div>
         <nav class="touch-controls" aria-label="touch controls">

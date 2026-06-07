@@ -629,7 +629,7 @@ body {
 h1 {
   color: var(--warm-text);
   font-size: var(--brand-title-size);
-  text-align: center;
+  text-align: left;
   text-shadow: 0 3px 12px rgba(99, 22, 13, 0.34);
 }
 
@@ -637,36 +637,40 @@ h1 {
   --brand-title-size: 34px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .brand-stack {
   display: flex;
-  width: calc(var(--brand-title-size) * 4);
-  flex-direction: column;
+  width: calc(var(--brand-title-size) * 7.4);
+  flex-direction: row;
   align-items: center;
-  gap: 3px;
-  margin-right: auto;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-right: 0;
   margin-bottom: 8px;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .brand-stack img {
   display: block;
-  width: 100%;
-  height: var(--brand-title-size);
+  width: auto;
+  max-width: calc((100% - 12px) / 2);
+  height: calc(var(--brand-title-size) * 0.9);
   object-fit: contain;
-  object-position: center;
+  object-position: left center;
   filter: drop-shadow(0 2px 5px rgba(99, 22, 13, 0.18));
 }
 
 .brand-stack img + img {
-  width: 100%;
+  width: auto;
 }
 
 .topbar p {
+  display: block;
   color: rgba(255, 248, 234, 0.92);
+  letter-spacing: 0.34em;
   text-shadow: 0 2px 8px rgba(99, 22, 13, 0.28);
 }
 
@@ -853,9 +857,20 @@ body::after {
   }
 
   .brand-stack {
-    width: calc(var(--brand-title-size) * 4);
+    width: calc(var(--brand-title-size) * 7.4);
     gap: 3px;
     margin-bottom: 4px;
+  }
+
+  .brand-stack img {
+    height: calc(var(--brand-title-size) * 0.88);
+    max-width: calc((100% - 3px) / 2);
+  }
+
+  .topbar p {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.26em;
   }
 }
 
