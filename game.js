@@ -29,13 +29,13 @@
   const SIZE_SKILL_SPAWN_RATE = JUMP_SKILL_SPAWN_RATE * 0.5;
   const SKILL_MIN_DURATION = 3;
   const SKILL_MAX_DURATION = 7;
-  const SKILL_NAME = "閫氶€氭牎鍥?;
-  const JUMP_SKILL_NAME = "璺宠穬澧炲己";
-  const SIZE_SKILL_NAME = "浣撶Н澧炲己";
+  const SKILL_NAME = "AI辅助写作技能";
+  const JUMP_SKILL_NAME = "AI学术问答技能";
+  const SIZE_SKILL_NAME = "AI学习拓展技能";
   const SKILL_BANNER_NAMES = {
-    shield: "AI杈呭姪鍐欎綔鎶€鑳?,
-    jump: "AI瀛︽湳闂瓟鎶€鑳?,
-    size: "AI瀛︿範鎷撳睍鎶€鑳?,
+    shield: "AI辅助写作技能",
+    jump: "AI学术问答技能",
+    size: "AI学习拓展技能",
   };
   const JUVENILE_OFFER_URL = "https://qy.chinaunicom.cn/mobile-h5/juvenile/home.html";
   const SKILL_BANNER_DURATION = 7;
@@ -100,45 +100,45 @@
 
   const I18N = {
     en: {
-      htmlLang: "en",
-      toggle: "涓枃",
-      tagline: "鏈夋ⅵ鏈夋柟鍚?,
-      distance: "Distance",
-      coins: "閲戝竵",
-      score: "Score",
-      readyTitle: "Press Space or Up to Start",
-      readyText: "Up jumps, Down ducks, Left/Right move on the track. Skill orbs grant a random 3-7s shield.",
-      start: "Start Game",
-      restart: "Restart",
-      gameOver: "Game Over",
-      points: "pts",
-      overText: (meters, coinTotal) => `Distance ${meters}m, coins ${coinTotal}. Press Space or click restart.`,
+      htmlLang: "zh-CN",
+      toggle: "中文",
+      tagline: "有梦有方向",
+      distance: "沃派里程",
+      coins: "沃派积分",
+      score: "分数",
+      readyTitle: "按空格或 ↑ 开始",
+      readyText: "↑ 上跳，↓ 蹲下，← 前进，→ 后退。不要碰到桌椅或云朵。",
+      start: "开始游戏",
+      restart: "重新开始",
+      gameOver: "游戏结束",
+      points: "分",
+      overText: (meters, coinTotal) => `沃派里程 ${meters}m，沃派积分 ${coinTotal}。按空格或点击按钮重新开始。`,
       touch: {
-        ArrowLeft: "鈫?,
-        ArrowDown: "鈫?,
-        ArrowUp: "鈫?,
-        ArrowRight: "鈫?,
+        ArrowLeft: "←",
+        ArrowDown: "↓",
+        ArrowUp: "↑",
+        ArrowRight: "→",
       },
     },
     zh: {
       htmlLang: "zh-CN",
-      toggle: "涓枃",
-      tagline: "鏈夋ⅵ鏈夋柟鍚?,
-      distance: "娌冩淳閲岀▼",
-      coins: "娌冩淳绉垎",
-      score: "鍒嗘暟",
-      readyTitle: "鎸夌┖鏍兼垨 鈫?寮€濮?,
-      readyText: "鈫?涓婅烦锛屸啌 韫蹭笅锛屸啇 鍓嶈繘锛屸啋 鍚庨€€銆備笉瑕佺鍒版妞呮垨浜戞湹銆?,
-      start: "寮€濮嬫父鎴?,
-      restart: "閲嶆柊寮€濮?,
-      gameOver: "娓告垙缁撴潫",
-      points: "鍒?,
-      overText: (meters, coinTotal) => `娌冩淳閲岀▼ ${meters}m锛屾矁娲剧Н鍒?${coinTotal}銆傛寜绌烘牸鎴栫偣鍑绘寜閽噸鏂板紑濮嬨€俙,
+      toggle: "中文",
+      tagline: "有梦有方向",
+      distance: "沃派里程",
+      coins: "沃派积分",
+      score: "分数",
+      readyTitle: "按空格或 ↑ 开始",
+      readyText: "↑ 上跳，↓ 蹲下，← 前进，→ 后退。不要碰到桌椅或云朵。",
+      start: "开始游戏",
+      restart: "重新开始",
+      gameOver: "游戏结束",
+      points: "分",
+      overText: (meters, coinTotal) => `沃派里程 ${meters}m，沃派积分 ${coinTotal}。按空格或点击按钮重新开始。`,
       touch: {
-        ArrowLeft: "鈫?,
-        ArrowDown: "鈫?,
-        ArrowUp: "鈫?,
-        ArrowRight: "鈫?,
+        ArrowLeft: "←",
+        ArrowDown: "↓",
+        ArrowUp: "↑",
+        ArrowRight: "→",
       },
     },
   };
@@ -288,9 +288,9 @@
   }
 
   function rewardMessage(score) {
-    if (score > 1000) return "鎮ㄥ凡鎴愬姛鑾峰緱鑱旈€氶潚灏戝勾涓撻」浼樻儬";
-    if (score > 500) return "鎮ㄨ繕娌℃湁鑾峰緱浼樻儬鍝︼紝璇峰啀鎺ュ啀鍘?;
-    return "鍔犳补娌冩淳闈掑勾锛屼綘杩樺彲浠ュ仛寰楁洿濂斤紒";
+    if (score > 1000) return "您已成功获得联通青少年专项优惠";
+    if (score > 500) return "您还没有获得优惠哦，请再接再厉";
+    return "加油沃派青年，你还可以做得更好！";
   }
 
   function renderGameOverOverlay() {
@@ -1040,12 +1040,12 @@
     ctx.stroke();
     ctx.fillStyle = "#6f2110";
     ctx.font = "bold 14px Microsoft YaHei, Segoe UI, Arial";
-    ctx.fillText("鎿嶄綔璇存槑", x + 14, y + 20);
+    ctx.fillText("操作说明", x + 14, y + 20);
     ctx.font = "12px Microsoft YaHei, Segoe UI, Arial";
     ctx.fillStyle = "#8d2c15";
-    ctx.fillText("鈫?涓婅烦   鈫?韫蹭笅   鈫?鍓嶈繘   鈫?鍚庨€€", x + 14, y + 42);
+    ctx.fillText("↑ 上跳   ↓ 蹲下   ← 前进   → 后退", x + 14, y + 42);
     ctx.fillStyle = "#c23b17";
-    ctx.fillText("涓嶈纰板埌妗屾鎴栦簯鏈?, x + 14, y + 62);
+    ctx.fillText("不要碰到桌椅或云朵", x + 14, y + 62);
     ctx.restore();
   }
 
@@ -1054,7 +1054,7 @@
     if (isSkillActive()) {
       activeSkills.push({
         title: SKILL_NAME,
-        detail: "閫熷害澧炲姞300%锛屽苟涓旀彁渚涗繚鎶ょ僵",
+        detail: "速度增加300%，并且提供保护罩",
         remaining: Math.max(0, skillActiveUntil - worldT),
         accent: "#2f9cff",
       });
@@ -1062,7 +1062,7 @@
     if (isJumpSkillActive()) {
       activeSkills.push({
         title: JUMP_SKILL_NAME,
-        detail: "璺宠穬楂樺害澧炲姞200%",
+        detail: "跳跃高度增加200%",
         remaining: Math.max(0, jumpSkillActiveUntil - worldT),
         accent: "#ff8a00",
       });
@@ -1070,7 +1070,7 @@
     if (isSizeSkillActive()) {
       activeSkills.push({
         title: SIZE_SKILL_NAME,
-        detail: "浣撶Н澧炲姞300%",
+        detail: "体积增加300%",
         remaining: Math.max(0, sizeSkillActiveUntil - worldT),
         accent: "#00c816",
       });
@@ -1120,7 +1120,7 @@
     ctx.stroke();
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 20px Microsoft YaHei, Segoe UI, Arial";
-    ctx.fillText(`鎶€鑳斤細${skillBannerText || SKILL_BANNER_NAMES.shield}`, x + 22, y + 27);
+    ctx.fillText(`技能：${skillBannerText || SKILL_BANNER_NAMES.shield}`, x + 22, y + 27);
     ctx.restore();
   }
 
