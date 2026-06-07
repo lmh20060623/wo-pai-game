@@ -607,7 +607,7 @@ canvas {
 
 /* Warm youth-area theme update */
 :root {
-  --page-bg-image: url("assets/page-background.png?v=campus-bg-20260607");
+  --page-bg-image: url("assets/page-background.png?v=track-bg-20260607");
   --warm-ink: #4c180e;
   --warm-text: #fff8ea;
   --warm-border: rgba(255, 213, 120, 0.78);
@@ -800,7 +800,7 @@ h1 {
 
 /* Stable fixed background layer */
 :root {
-  --page-bg-image: url("assets/page-background.png?v=campus-bg-20260607");
+  --page-bg-image: url("assets/page-background.png?v=track-bg-20260607");
 }
 
 html {
