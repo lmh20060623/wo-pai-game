@@ -630,8 +630,8 @@ h1 {
   color: var(--warm-text);
   font-size: var(--brand-title-size);
   width: 100%;
-  text-align: justify;
-  text-align-last: justify;
+  text-align: left;
+  text-align-last: auto;
   white-space: nowrap;
   text-shadow: 0 3px 12px rgba(99, 22, 13, 0.34);
 }
@@ -674,9 +674,10 @@ h1 {
 
 .topbar p {
   display: block;
-  width: 100%;
+  width: 4em;
   color: rgba(255, 248, 234, 0.92);
-  letter-spacing: 0.52em;
+  letter-spacing: 0.46em;
+  white-space: nowrap;
   text-shadow: 0 2px 8px rgba(99, 22, 13, 0.28);
 }
 
@@ -877,7 +878,7 @@ body::after {
   .topbar p {
     display: block;
     font-size: 12px;
-    letter-spacing: 0.36em;
+    letter-spacing: 0.34em;
   }
 }
 
