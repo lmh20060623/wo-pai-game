@@ -14,9 +14,7 @@
   const overlayText = document.getElementById("overlayText");
   const startBtn = document.getElementById("startBtn");
   const orientationGate = document.getElementById("orientationGate");
-
-  const IS_MOBILE_RENDER = window.matchMedia?.("(hover: none) and (pointer: coarse)").matches || window.innerWidth <= 900;
-  const DPR = Math.max(1, Math.min(IS_MOBILE_RENDER ? 1.15 : 2, window.devicePixelRatio || 1));
+  const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
   const BASE_W = 960;
   const BASE_H = 420;
   const GROUND_Y = 330;
@@ -198,8 +196,6 @@
     const rect = canvas.getBoundingClientRect();
     canvas.width = Math.round(rect.width * DPR);
     canvas.height = Math.round(rect.height * DPR);
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = IS_MOBILE_RENDER ? "low" : "medium";
     ctx.setTransform((rect.width * DPR) / BASE_W, 0, 0, (rect.height * DPR) / BASE_H, 0, 0);
   }
 
@@ -832,7 +828,7 @@
     const bandH = Math.max(5, player.h * 0.095);
     const totalH = bandH * 6;
     const colors = ["#ff1518", "#ff970e", "#ffed00", "#00c82b", "#1495de", "#a600ff"];
-    const step = IS_MOBILE_RENDER ? 24 : 14;
+    const step = 14;
     ctx.save();
     ctx.globalCompositeOperation = "source-over";
     for (let band = 0; band < colors.length; band += 1) {
@@ -968,7 +964,7 @@
     const pulse = 1 + Math.sin(orb.spin) * 0.08;
     const size = orb.r * 2 * pulse;
     ctx.shadowColor = "rgba(58, 185, 255, 0.8)";
-    ctx.shadowBlur = IS_MOBILE_RENDER ? 0 : 14;
+    ctx.shadowBlur = 14;
     const img = assets.skillOrb;
     if (img.complete && img.naturalWidth) {
       ctx.drawImage(img, orb.x - size / 2, orb.y - size / 2, size, size);
@@ -990,7 +986,7 @@
     const pulse = 1 + Math.sin(orb.spin) * 0.08;
     const size = orb.r * 2 * pulse;
     ctx.shadowColor = "rgba(255, 132, 0, 0.8)";
-    ctx.shadowBlur = IS_MOBILE_RENDER ? 0 : 14;
+    ctx.shadowBlur = 14;
     const img = assets.jumpSkillOrb;
     if (img.complete && img.naturalWidth) {
       ctx.drawImage(img, orb.x - size / 2, orb.y - size / 2, size, size);
@@ -1012,7 +1008,7 @@
     const pulse = 1 + Math.sin(orb.spin) * 0.08;
     const size = orb.r * 2 * pulse;
     ctx.shadowColor = "rgba(0, 205, 22, 0.78)";
-    ctx.shadowBlur = IS_MOBILE_RENDER ? 0 : 14;
+    ctx.shadowBlur = 14;
     const img = assets.sizeSkillOrb;
     if (img.complete && img.naturalWidth) {
       ctx.drawImage(img, orb.x - size / 2, orb.y - size / 2, size, size);

@@ -607,7 +607,7 @@ canvas {
 
 /* Warm youth-area theme update */
 :root {
-  --page-bg-image: url("assets/page-background.png?v=mobile-fast-20260607");
+  --page-bg-image: url("assets/page-background.png?v=campus-bg-20260607");
   --warm-ink: #4c180e;
   --warm-text: #fff8ea;
   --warm-border: rgba(255, 213, 120, 0.78);
@@ -800,8 +800,7 @@ h1 {
 
 /* Stable fixed background layer */
 :root {
-  --page-bg-image: url("assets/page-background.png?v=mobile-fast-20260607");
-  --page-bg-mobile-image: url("assets/page-background-mobile.jpg?v=mobile-fast-20260607");
+  --page-bg-image: url("assets/page-background.png?v=campus-bg-20260607");
 }
 
 html {
@@ -854,27 +853,6 @@ body {
   background-attachment: scroll, scroll;
 }
 
-@media (max-width: 900px), (hover: none) and (pointer: coarse) {
-  :root {
-    --page-bg-image: var(--page-bg-mobile-image);
-  }
-
-  .stage-wrap,
-  .overlay-panel,
-  .orientation-card,
-  .scoreboard span,
-  .lang-toggle,
-  #startBtn,
-  .result-message {
-    box-shadow: none;
-  }
-
-  .overlay,
-  .touch-controls button {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
 
 body::before,
 body::after {
