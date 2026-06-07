@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#eef3f8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>沃派酷跑</title>
+    <link rel="preload" as="image" href="assets/runner-cutout.png">
+    <link rel="preload" as="image" href="assets/desk-chair-cutout.png">
+    <link rel="preload" as="image" href="assets/coin.png">
+    <link rel="preload" as="image" href="assets/rainbow-tail.jpg">
+    <link rel="preload" as="audio" href="assets/background-music.mp3" type="audio/mpeg">
+    <link rel="preload" as="audio" href="assets/ground-sfx.mp3" type="audio/mpeg">
+    <link rel="preload" as="image" href="assets/page-background-mobile.jpg?v=mobile-fast-20260607" media="(max-width: 900px)">
+    <link rel="stylesheet" href="styles.css?v=mobile-fast-20260607">
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="topbar" aria-label="game status">
+        <div>
+          <div class="brand-stack" aria-label="brand logos">
+            <img src="assets/china-unicom-logo-clean.png" alt="中国联通 China unicom">
+            <img src="assets/wo-logo-clean.png" alt="联通沃派">
+          </div>
+          <h1>沃派酷跑</h1>
+          <p id="tagline">有梦有方向</p>
+        </div>
+        <div class="scoreboard">
+          <button id="langToggle" class="lang-toggle" type="button" aria-label="当前语言">中文</button>
+          <span><span id="distanceLabel">沃派里程</span> <strong id="distance">0</strong>m</span>
+          <span><span id="coinsLabel">沃派积分</span> <strong id="coins">0</strong></span>
+          <span><span id="scoreLabel">分数</span> <strong id="score">0</strong></span>
+        </div>
+      </header>
+
+      <section class="stage-wrap">
+        <canvas id="game" width="960" height="420" aria-label="沃派酷跑"></canvas>
+        <div id="overlay" class="overlay">
+          <div class="overlay-panel">
+            <h2 id="overlayTitle">按空格或 ↑ 开始</h2>
+            <div id="overlayText" class="overlay-copy">↑ 上跳，↓ 蹲下，← 前进，→ 后退。不要碰到桌椅或云朵。</div>
+            <button id="startBtn" type="button">开始游戏</button>
+          </div>
+        </div>
+        <nav class="touch-controls" aria-label="touch controls">
+          <button class="touch-left" type="button" data-key="ArrowLeft" aria-label="Left">←</button>
+          <button class="touch-down" type="button" data-key="ArrowDown" aria-label="Duck">↓</button>
+          <button class="touch-up" type="button" data-key="ArrowUp" aria-label="Jump">↑</button>
+          <button class="touch-right" type="button" data-key="ArrowRight" aria-label="Right">→</button>
+        </nav>
+      </section>
+    </main>
+    <div id="orientationGate" class="orientation-gate" aria-hidden="true">
+      <div class="orientation-card">
+        <div class="orientation-icon">↻</div>
+        <strong>请横屏游玩</strong>
+        <span>将手机旋转为横屏后继续游戏</span>
+      </div>
+    </div>
+
+    <script src="game.js?v=mobile-fast-20260607"></script>
+  </body>
+</html>
