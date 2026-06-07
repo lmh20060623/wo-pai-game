@@ -97,6 +97,7 @@
   let skillBannerUntil = 0;
   let skillBannerText = "";
   let playerIntroFlashUntil = 0;
+  let controlGuideUntil = 0;
 
   const I18N = {
     en: {
@@ -259,6 +260,7 @@
     skillBannerUntil = 0;
     skillBannerText = "";
     playerIntroFlashUntil = 1.1;
+    controlGuideUntil = 5;
     stopGroundSfx();
     Object.assign(player, {
       x: PLAYER_START_X,
@@ -1025,7 +1027,7 @@
   }
 
   function drawControlGuide() {
-    if (state !== "running") return;
+    if (state !== "running" || worldT > controlGuideUntil) return;
     const x = 14;
     const y = 14;
     const w = 268;
