@@ -800,7 +800,7 @@ h1 {
 
 /* Stable fixed background layer */
 :root {
-  --page-bg-image: url("assets/page-background.png");
+  --page-bg-image: url("assets/page-background.png?v=campus-bg-20260607");
 }
 
 html {
