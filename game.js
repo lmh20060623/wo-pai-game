@@ -98,7 +98,6 @@
   let skillBannerText = "";
   let playerIntroFlashUntil = 0;
   let controlGuideHideAt = 0;
-  let scoreHintHideAt = 0;
 
   const I18N = {
     en: {
@@ -262,7 +261,6 @@
     skillBannerText = "";
     playerIntroFlashUntil = 1.1;
     controlGuideHideAt = performance.now() + 5000;
-    scoreHintHideAt = performance.now() + 5000;
     updateScoreHintPanel();
     stopGroundSfx();
     Object.assign(player, {
@@ -1061,33 +1059,8 @@
 
   function updateScoreHintPanel() {
     if (!scoreHintPanel) return;
-    const shouldShow = state === "running" && performance.now() < scoreHintHideAt;
+    const shouldShow = state === "running";
     scoreHintPanel.classList.toggle("hidden", !shouldShow);
-  }
-
-  function drawScoreHint() {
-    if (state !== "running" || performance.now() >= scoreHintHideAt) return;
-    const w = 314;
-    const h = 92;
-    const x = BASE_W - w - 14;
-    const y = 14;
-    ctx.save();
-    ctx.fillStyle = "rgba(255, 246, 218, 0.94)";
-    roundRect(x, y, w, h, 8);
-    ctx.fill();
-    ctx.strokeStyle = "rgba(116, 45, 18, 0.58)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.fillStyle = "#6f2110";
-    ctx.font = "bold 14px Microsoft YaHei, Segoe UI, Arial";
-    ctx.fillText("结束提示", x + 14, y + 21);
-    ctx.font = "12px Microsoft YaHei, Segoe UI, Arial";
-    ctx.fillStyle = "#8d2c15";
-    ctx.fillText(`1000分以上：${rewardMessage(1001)}`, x + 14, y + 44);
-    ctx.fillText(`501-1000分：${rewardMessage(501)}`, x + 14, y + 63);
-    ctx.fillStyle = "#c23b17";
-    ctx.fillText(`500分及以下：${rewardMessage(500)}`, x + 14, y + 82);
-    ctx.restore();
   }
 
   function drawSkillStatus() {
