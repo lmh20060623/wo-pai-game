@@ -607,7 +607,7 @@ canvas {
 
 /* Warm youth-area theme update */
 :root {
-  --page-bg-image: url("assets/page-background.png?v=school-run-bg-20260607");
+  --page-bg-image: url("assets/page-background.png?v=orange-bg-20260608");
   --warm-ink: #4c180e;
   --warm-text: #fff8ea;
   --warm-border: rgba(255, 213, 120, 0.78);
@@ -627,13 +627,19 @@ body {
 }
 
 h1 {
-  color: var(--warm-text);
+  display: inline-block;
+  border: 1px solid rgba(255, 218, 138, 0.86);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 246, 218, 0.96), rgba(255, 210, 121, 0.94));
+  color: #6f2110;
   font-size: var(--brand-title-size);
-  width: 100%;
+  width: auto;
+  padding: 5px 12px 6px;
   text-align: left;
   text-align-last: auto;
   white-space: nowrap;
-  text-shadow: 0 3px 12px rgba(99, 22, 13, 0.34);
+  text-shadow: none;
+  box-shadow: 0 10px 24px rgba(117, 31, 14, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
 .topbar > div:first-child {
@@ -675,10 +681,26 @@ h1 {
 .topbar p {
   display: block;
   width: 4em;
-  color: rgba(255, 248, 234, 0.92);
+  margin-top: 7px;
+  border: 1px solid rgba(255, 218, 138, 0.76);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 246, 218, 0.94), rgba(255, 210, 121, 0.90));
+  color: #7d3a1e;
+  padding: 4px 9px 5px;
   letter-spacing: 0.46em;
   white-space: nowrap;
-  text-shadow: 0 2px 8px rgba(99, 22, 13, 0.28);
+  text-shadow: none;
+  box-shadow: 0 8px 20px rgba(117, 31, 14, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.74);
+}
+
+.scoreboard {
+  position: fixed;
+  left: max(14px, env(safe-area-inset-left));
+  right: auto;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 18;
+  justify-content: start;
+  max-width: min(520px, calc(100vw - 28px));
 }
 
 .scoreboard span {
@@ -800,7 +822,7 @@ h1 {
 
 /* Stable fixed background layer */
 :root {
-  --page-bg-image: url("assets/page-background.png?v=school-run-bg-20260607");
+  --page-bg-image: url("assets/page-background.png?v=orange-bg-20260608");
 }
 
 html {
