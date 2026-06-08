@@ -934,10 +934,18 @@ body::after {
   }
 
   .score-hint-panel {
-    top: calc(100% + 6px);
-    width: min(400px, calc(100vw - 20px));
-    padding: 9px 10px;
+    left: 8px;
+    top: auto;
+    bottom: 8px;
+    width: min(330px, calc(100% - 16px));
+    padding: 8px 9px;
     font-size: 11px;
+    gap: 3px;
+    pointer-events: none;
+  }
+
+  .score-hint-panel strong {
+    font-size: 12px;
   }
 }
 
