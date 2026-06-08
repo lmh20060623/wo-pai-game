@@ -40,6 +40,7 @@ button {
 }
 
 .game-shell {
+  position: relative;
   width: min(1120px, 100%);
 }
 
@@ -679,8 +680,9 @@ h1 {
 }
 
 .topbar p {
-  display: block;
-  width: 4em;
+  display: inline-block;
+  width: auto;
+  min-width: calc(4em + 1.38em);
   margin-top: 7px;
   border: 1px solid rgba(255, 218, 138, 0.76);
   border-radius: 8px;
@@ -694,10 +696,10 @@ h1 {
 }
 
 .scoreboard {
-  position: fixed;
-  left: max(14px, env(safe-area-inset-left));
+  position: absolute;
+  left: 14px;
   right: auto;
-  bottom: max(14px, env(safe-area-inset-bottom));
+  bottom: 14px;
   z-index: 18;
   justify-content: start;
   max-width: min(520px, calc(100vw - 28px));
@@ -902,6 +904,7 @@ body::after {
     display: block;
     font-size: 12px;
     letter-spacing: 0.34em;
+    min-width: calc(4em + 1.02em);
   }
 }
 
