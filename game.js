@@ -1059,7 +1059,7 @@
 
   function updateScoreHintPanel() {
     if (!scoreHintPanel) return;
-    const shouldShow = state === "running";
+    const shouldShow = state !== "over";
     scoreHintPanel.classList.toggle("hidden", !shouldShow);
   }
 
