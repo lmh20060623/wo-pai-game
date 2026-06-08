@@ -14,6 +14,7 @@
   const overlayText = document.getElementById("overlayText");
   const startBtn = document.getElementById("startBtn");
   const orientationGate = document.getElementById("orientationGate");
+  const scoreHintPanel = document.getElementById("scoreHintPanel");
   const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
   const BASE_W = 960;
   const BASE_H = 420;
@@ -262,6 +263,7 @@
     playerIntroFlashUntil = 1.1;
     controlGuideHideAt = performance.now() + 5000;
     scoreHintHideAt = performance.now() + 5000;
+    updateScoreHintPanel();
     stopGroundSfx();
     Object.assign(player, {
       x: PLAYER_START_X,
@@ -284,6 +286,7 @@
     stopBackgroundMusic();
     stopGroundSfx();
     const text = I18N[currentLang];
+    hideScoreHintPanel();
     renderGameOverOverlay();
     startBtn.textContent = text.restart;
     overlay.classList.remove("hidden");
@@ -362,6 +365,7 @@
     if (state === "running") {
       update(dt);
     }
+    updateScoreHintPanel();
     draw();
     if (state === "running") {
       requestAnimationFrame(loop);
@@ -709,7 +713,6 @@
     drawRainbowTail();
     drawPlayer();
     drawControlGuide();
-    drawScoreHint();
     drawSkillStatus();
     drawSkillBanner();
   }
@@ -1050,6 +1053,16 @@
     ctx.fillStyle = "#c23b17";
     ctx.fillText("不要碰到桌椅或云朵", x + 14, y + 62);
     ctx.restore();
+  }
+
+  function hideScoreHintPanel() {
+    if (scoreHintPanel) scoreHintPanel.classList.add("hidden");
+  }
+
+  function updateScoreHintPanel() {
+    if (!scoreHintPanel) return;
+    const shouldShow = state === "running" && performance.now() < scoreHintHideAt;
+    scoreHintPanel.classList.toggle("hidden", !shouldShow);
   }
 
   function drawScoreHint() {

@@ -387,7 +387,7 @@ canvas {
   }
 
   .game-shell {
-    width: 100%;
+    width: min(100%, calc((100svh - 154px) * 16 / 7));
   }
 
   .topbar {
@@ -427,7 +427,8 @@ canvas {
 
   .stage-wrap {
     min-height: auto;
-    height: min(56svw, calc(100svh - 154px));
+    height: auto;
+    max-height: none;
     aspect-ratio: 16 / 7;
     border-radius: 6px;
   }
@@ -492,8 +493,8 @@ canvas {
   }
 
   .stage-wrap {
-    height: calc(100svh - 118px);
-    max-height: 430px;
+    height: auto;
+    max-height: none;
   }
 
   .touch-controls {
@@ -532,7 +533,7 @@ canvas {
   }
 
   .stage-wrap {
-    height: min(62svw, calc(100svh - 184px));
+    height: auto;
   }
 
   .scoreboard span,
@@ -629,19 +630,18 @@ body {
 }
 
 h1 {
-  display: inline-block;
-  border: 1px solid rgba(255, 218, 138, 0.86);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255, 246, 218, 0.96), rgba(255, 210, 121, 0.94));
-  color: #6f2110;
+  display: block;
+  border: 0;
+  background: transparent;
+  color: var(--warm-text);
   font-size: var(--brand-title-size);
-  width: auto;
-  padding: 5px 12px 6px;
+  width: 100%;
+  padding: 0;
   text-align: left;
   text-align-last: auto;
   white-space: nowrap;
-  text-shadow: none;
-  box-shadow: 0 10px 24px rgba(117, 31, 14, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  text-shadow: 0 3px 12px rgba(99, 22, 13, 0.45);
+  box-shadow: none;
 }
 
 .topbar > div:first-child {
@@ -681,30 +681,26 @@ h1 {
 }
 
 .topbar p {
-  display: inline-block;
-  width: auto;
-  min-width: calc(4em + 1.38em);
+  display: block;
+  width: 4em;
+  min-width: 0;
   margin-top: 7px;
-  border: 1px solid rgba(255, 218, 138, 0.76);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255, 246, 218, 0.94), rgba(255, 210, 121, 0.90));
-  color: #7d3a1e;
-  padding: 4px 9px 5px;
+  border: 0;
+  background: transparent;
+  color: var(--warm-text);
+  padding: 0;
   letter-spacing: 0.46em;
   white-space: nowrap;
-  text-shadow: none;
-  box-shadow: 0 8px 20px rgba(117, 31, 14, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  text-shadow: 0 2px 10px rgba(99, 22, 13, 0.46);
+  box-shadow: none;
 }
 
 .scoreboard {
-  position: absolute;
-  left: 0;
-  right: auto;
-  top: calc(100% + 8px);
-  bottom: auto;
-  z-index: 18;
-  justify-content: start;
-  max-width: min(520px, calc(100vw - 28px));
+  position: static;
+  inset: auto;
+  z-index: auto;
+  justify-content: end;
+  max-width: none;
 }
 
 .scoreboard span {
@@ -734,6 +730,34 @@ h1 {
   border-color: rgba(255, 213, 120, 0.66);
   background: rgba(255, 207, 116, 0.18);
   box-shadow: 0 22px 54px rgba(117, 31, 14, 0.26);
+  contain: layout paint;
+}
+
+.score-hint-panel {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 18;
+  display: grid;
+  width: min(440px, calc(100vw - 28px));
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 218, 138, 0.86);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 246, 218, 0.96), rgba(255, 210, 121, 0.94));
+  color: #7d3a1e;
+  font-size: 12px;
+  line-height: 1.35;
+  box-shadow: 0 12px 30px rgba(117, 31, 14, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.score-hint-panel strong {
+  color: #6f2110;
+  font-size: 14px;
+}
+
+.score-hint-panel.hidden {
+  display: none;
 }
 
 .overlay {
@@ -906,7 +930,20 @@ body::after {
     display: block;
     font-size: 12px;
     letter-spacing: 0.34em;
-    min-width: calc(4em + 1.02em);
+    min-width: 0;
+  }
+
+  .score-hint-panel {
+    top: calc(100% + 6px);
+    width: min(400px, calc(100vw - 20px));
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .game-shell {
+    width: min(100%, calc((100svh - 118px) * 16 / 7));
   }
 }
 

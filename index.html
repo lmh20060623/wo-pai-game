@@ -11,10 +11,11 @@
     <link rel="preload" as="image" href="assets/runner-cutout.png">
     <link rel="preload" as="image" href="assets/desk-chair-cutout.png">
     <link rel="preload" as="image" href="assets/coin.png">
+    <link rel="preload" as="image" href="assets/page-background.png?v=orange-bg-20260608" fetchpriority="high">
     <link rel="preload" as="image" href="assets/rainbow-tail.jpg">
     <link rel="preload" as="audio" href="assets/background-music.mp3" type="audio/mpeg">
     <link rel="preload" as="audio" href="assets/ground-sfx.mp3" type="audio/mpeg">
-    <link rel="stylesheet" href="styles.css?v=outside-frame-score-20260608">
+    <link rel="stylesheet" href="styles.css?v=hint-outside-frame-20260608">
   </head>
   <body>
     <main class="game-shell">
@@ -51,6 +52,12 @@
           <button class="touch-right" type="button" data-key="ArrowRight" aria-label="Right">→</button>
         </nav>
       </section>
+      <div id="scoreHintPanel" class="score-hint-panel hidden" aria-live="polite">
+        <strong>结束提示</strong>
+        <span>1000分以上：您已成功获得联通青少年专项优惠</span>
+        <span>501-1000分：您还没有获得优惠哦，请再接再厉</span>
+        <span>500分及以下：加油沃派青年，你还可以做得更好！</span>
+      </div>
     </main>
     <div id="orientationGate" class="orientation-gate" aria-hidden="true">
       <div class="orientation-card">
@@ -60,6 +67,6 @@
       </div>
     </div>
 
-    <script src="game.js?v=score-hint-20260608"></script>
+    <script src="game.js?v=hint-outside-frame-20260608"></script>
   </body>
 </html>
