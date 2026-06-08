@@ -42,6 +42,7 @@ button {
 .game-shell {
   position: relative;
   width: min(1120px, 100%);
+  margin-bottom: 64px;
 }
 
 .topbar {
@@ -697,9 +698,10 @@ h1 {
 
 .scoreboard {
   position: absolute;
-  left: 14px;
+  left: 0;
   right: auto;
-  bottom: 14px;
+  top: calc(100% + 8px);
+  bottom: auto;
   z-index: 18;
   justify-content: start;
   max-width: min(520px, calc(100vw - 28px));
