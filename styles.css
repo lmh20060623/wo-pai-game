@@ -747,7 +747,7 @@ h1 {
   border-radius: 0;
   background: transparent;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 700;
   line-height: 1.35;
   white-space: nowrap;
@@ -758,7 +758,7 @@ h1 {
 .score-hint-panel strong {
   flex: 0 0 auto;
   color: #ffffff;
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .score-hint-panel span {
@@ -950,7 +950,7 @@ body::after {
     gap: 8px;
     padding: 0;
     overflow-x: auto;
-    font-size: 16px;
+    font-size: 19px;
     scrollbar-width: none;
     pointer-events: none;
   }
@@ -960,7 +960,7 @@ body::after {
   }
 
   .score-hint-panel strong {
-    font-size: 17px;
+    font-size: 20px;
   }
 }
 
