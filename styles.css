@@ -42,7 +42,7 @@ button {
 .game-shell {
   position: relative;
   width: min(1120px, 100%);
-  margin-bottom: 64px;
+  margin-bottom: 112px;
 }
 
 .topbar {
@@ -388,6 +388,7 @@ canvas {
 
   .game-shell {
     width: min(100%, calc((100svh - 154px) * 16 / 7));
+    margin-bottom: 92px;
   }
 
   .topbar {
@@ -739,13 +740,10 @@ h1 {
   right: 0;
   top: calc(100% + 8px);
   z-index: 18;
-  display: flex;
+  display: grid;
   width: 100%;
   max-width: 100%;
-  align-items: center;
-  flex-wrap: wrap;
-  column-gap: 14px;
-  row-gap: 2px;
+  gap: 2px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -755,7 +753,6 @@ h1 {
   font-weight: 700;
   line-height: 1.35;
   white-space: normal;
-  overflow-wrap: anywhere;
   overflow-x: hidden;
   overflow-y: visible;
   scrollbar-width: none;
@@ -768,14 +765,23 @@ h1 {
 }
 
 .score-hint-panel strong {
-  flex: 0 0 auto;
   color: #ffffff;
   font-size: 25px;
+}
+
+.score-hint-line {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  gap: 14px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .score-hint-panel span {
   flex: 0 1 auto;
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .score-hint-panel.hidden {
@@ -961,8 +967,7 @@ body::after {
     bottom: auto;
     width: 100%;
     max-width: 100%;
-    column-gap: 8px;
-    row-gap: 2px;
+    gap: 2px;
     padding: 0;
     overflow-x: hidden;
     font-size: 19px;
@@ -976,6 +981,10 @@ body::after {
 
   .score-hint-panel strong {
     font-size: 20px;
+  }
+
+  .score-hint-line {
+    gap: 8px;
   }
 }
 
