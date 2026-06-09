@@ -753,7 +753,7 @@ h1 {
   font-weight: 700;
   line-height: 1.35;
   white-space: nowrap;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
   scrollbar-width: none;
   text-shadow: 0 2px 8px rgba(76, 24, 14, 0.72);
@@ -959,7 +959,7 @@ body::after {
     max-width: 100%;
     gap: 8px;
     padding: 0;
-    overflow-x: auto;
+    overflow-x: hidden;
     font-size: 19px;
     scrollbar-width: none;
     pointer-events: none;

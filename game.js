@@ -38,6 +38,7 @@
     jump: "AI学术问答技能",
     size: "AI学习拓展技能",
   };
+  const BACKGROUND_SEQUENCE_SECONDS = 4;
   const JUVENILE_OFFER_URL = "https://qy.chinaunicom.cn/mobile-h5/juvenile/home.html";
   const SKILL_BANNER_DURATION = 7;
 
@@ -248,7 +249,7 @@
     speed = 330;
     worldT = 0;
     backgroundIndex = 0;
-    backgroundTimer = random(6, 10);
+    backgroundTimer = BACKGROUND_SEQUENCE_SECONDS;
     obstacles = [];
     coins = [];
     skillOrbs = [];
@@ -378,7 +379,7 @@
     backgroundTimer -= dt;
     if (backgroundTimer <= 0) {
       backgroundIndex = nextBackgroundIndex(backgroundIndex);
-      backgroundTimer = random(7, 12);
+      backgroundTimer = BACKGROUND_SEQUENCE_SECONDS;
     }
 
     const moveDir = (keys.has("ArrowRight") ? 1 : 0) - (keys.has("ArrowLeft") ? 1 : 0);
