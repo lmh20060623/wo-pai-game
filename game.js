@@ -247,7 +247,7 @@
     coinCount = 0;
     speed = 330;
     worldT = 0;
-    backgroundIndex = randomBackgroundIndex(-1);
+    backgroundIndex = 0;
     backgroundTimer = random(6, 10);
     obstacles = [];
     coins = [];
@@ -377,7 +377,7 @@
     distance += (sceneSpeed * dt) / 10;
     backgroundTimer -= dt;
     if (backgroundTimer <= 0) {
-      backgroundIndex = randomBackgroundIndex(backgroundIndex);
+      backgroundIndex = nextBackgroundIndex(backgroundIndex);
       backgroundTimer = random(7, 12);
     }
 
@@ -1154,13 +1154,9 @@
     return isSizeSkillActive() ? SIZE_SKILL_SCALE : 1;
   }
 
-  function randomBackgroundIndex(previous) {
+  function nextBackgroundIndex(previous) {
     if (assets.backgrounds.length <= 1) return 0;
-    let next = Math.floor(random(0, assets.backgrounds.length));
-    while (next === previous) {
-      next = Math.floor(random(0, assets.backgrounds.length));
-    }
-    return next;
+    return (previous + 1) % assets.backgrounds.length;
   }
 
   function drawCoverImage(img, x, y, w, h) {

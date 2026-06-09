@@ -736,10 +736,12 @@ h1 {
 .score-hint-panel {
   position: absolute;
   left: 0;
+  right: 0;
   top: calc(100% + 8px);
   z-index: 18;
   display: flex;
-  width: min(1120px, calc(100vw - 28px));
+  width: 100%;
+  max-width: 100%;
   align-items: center;
   gap: 14px;
   padding: 0;
@@ -751,8 +753,15 @@ h1 {
   font-weight: 700;
   line-height: 1.35;
   white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
   text-shadow: 0 2px 8px rgba(76, 24, 14, 0.72);
   box-shadow: none;
+}
+
+.score-hint-panel::-webkit-scrollbar {
+  display: none;
 }
 
 .score-hint-panel strong {
@@ -946,7 +955,8 @@ body::after {
     left: 0;
     top: calc(100% + 6px);
     bottom: auto;
-    width: min(100%, calc(100vw - 20px));
+    width: 100%;
+    max-width: 100%;
     gap: 8px;
     padding: 0;
     overflow-x: auto;
