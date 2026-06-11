@@ -285,7 +285,7 @@
     stopBackgroundMusic();
     stopGroundSfx();
     const text = I18N[currentLang];
-    hideScoreHintPanel();
+    updateScoreHintPanel();
     renderGameOverOverlay();
     startBtn.textContent = text.restart;
     overlay.classList.remove("hidden");
@@ -1055,13 +1055,12 @@
   }
 
   function hideScoreHintPanel() {
-    if (scoreHintPanel) scoreHintPanel.classList.add("hidden");
+    if (scoreHintPanel) scoreHintPanel.classList.remove("hidden");
   }
 
   function updateScoreHintPanel() {
     if (!scoreHintPanel) return;
-    const shouldShow = state !== "over";
-    scoreHintPanel.classList.toggle("hidden", !shouldShow);
+    scoreHintPanel.classList.remove("hidden");
   }
 
   function drawSkillStatus() {
